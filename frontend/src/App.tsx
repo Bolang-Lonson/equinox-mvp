@@ -1,0 +1,38 @@
+import { useState } from 'react'
+
+function App() {
+  const [count, setCount] = useState(0)
+
+  return (
+    <div className="min-h-screen bg-gray-50 text-gray-900 flex items-center justify-center p-6">
+      <div className="max-w-md w-full space-y-6">
+        <header className="text-center">
+          <h1 className="text-3xl font-bold">Equinox MVP</h1>
+          <p className="text-sm text-gray-600 mt-1">React + TailwindCSS + TypeScript</p>
+        </header>
+        <main className="bg-white rounded-xl shadow p-6 space-y-4">
+          <p className="text-gray-700">Count is <span className="font-semibold">{count}</span></p>
+          <div className="flex gap-3">
+            <button
+              className="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              onClick={() => setCount((c) => c + 1)}
+            >
+              Increment
+            </button>
+            <button
+              className="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              onClick={() => setCount(0)}
+            >
+              Reset
+            </button>
+          </div>
+        </main>
+        <footer className="text-center text-xs text-gray-500">
+          Tailwind is configured. Edit <code>src/App.tsx</code> to continue.
+        </footer>
+      </div>
+    </div>
+  )
+}
+
+export default App
