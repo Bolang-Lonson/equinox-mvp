@@ -7,7 +7,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/health', (_req: Request, res: Response) => {
-  res.json({ status: 'ok' });
+  res.json({ status: 'Hello there!', time: new Date().toISOString() });
 });
 
 const port = Number(process.env.PORT) || 4000;

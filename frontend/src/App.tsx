@@ -1,17 +1,27 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [status, setStatus] = useState<string>('');
 
+  const testBackend = async () => {
+    await fetch('http://localhost:4000/health', {
+      headers: new Headers(),
+      method: 'get',
+    })
+    .then(resp => resp.json())
+    .then(data => setStatus(data.status));
+  }
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 flex items-center justify-center p-6">
       <div className="max-w-md w-full space-y-6">
         <header className="text-center">
           <h1 className="text-3xl font-bold">Equinox MVP</h1>
-          <p className="text-sm text-gray-600 mt-1">React + TailwindCSS + TypeScript</p>
+          <p className="text-sm text-gray-600 mt-1 select-none">React + TailwindCSS + TypeScript</p>
         </header>
         <main className="bg-white rounded-xl shadow p-6 space-y-4">
           <p className="text-gray-700">Count is <span className="font-semibold">{count}</span></p>
+          <p className="text-gray-700">Status is <span className="font-semibold">{status}</span></p>
           <div className="flex gap-3">
             <button
               className="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
@@ -24,6 +34,12 @@ function App() {
               onClick={() => setCount(0)}
             >
               Reset
+            </button>
+            <button
+              className="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              onClick={testBackend}
+            >
+              Test Backend
             </button>
           </div>
         </main>
