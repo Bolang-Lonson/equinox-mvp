@@ -10,8 +10,22 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^6.5.0",
+    "@mui/material": "^6.5.0",
+    "@mui/styled-engine-sc": "^7.3.2",
+    "@mui/x-charts": "^8.11.3",
+    "@mui/x-data-grid": "^8.11.3",
+    "@mui/x-data-grid-pro": "^8.11.3",
+    "@mui/x-date-pickers": "^8.11.3",
+    "@mui/x-tree-view": "^8.11.3",
+    "dayjs": "^1.11.18",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^7.9.1",
+    "react-spring": "^10.0.3",
+    "styled-components": "^6.1.19"
   },
   "devDependencies": {
     "@eslint/js": "^9.35.0",
