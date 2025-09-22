@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import Dashboard from './pages/dashboard';
-import OverviewPage from './pages';
+import OverviewPage from './pages/overview';
 import PortfolioPage from './pages/portfolio';
 import DocketingPage from './pages/docketing';
 import RenewalsPage from './pages/renewals';
 import MonitoringPage from './pages/monitoring';
 import DocumentsPage from './pages/documents';
 import ReportingPage from './pages/reporting';
+import ProtectedRoute from './components/ProtectedRoute';
+import LoginPage from './pages/login';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -66,15 +68,18 @@ function App() {
           </div>
         }
       />
-      <Route path='/dashboard' element={<Dashboard/>}>
-        <Route index element={<OverviewPage/>} />
-        <Route path='portfolio' element={<PortfolioPage/>} />
-        <Route path='docketing' element={<DocketingPage/>} />
-        <Route path='renewals' element={<RenewalsPage/>} />
-        <Route path='monitoring' element={<MonitoringPage/>} />
-        <Route path='documents' element={<DocumentsPage/>} />
-        <Route path='reporting' element={<ReportingPage/>} />
+      <Route element={<ProtectedRoute/>}>
+        <Route path='/dashboard' element={<Dashboard/>}>
+          <Route index element={<OverviewPage/>} />
+          <Route path='portfolio' element={<PortfolioPage/>} />
+          <Route path='docketing' element={<DocketingPage/>} />
+          <Route path='renewals' element={<RenewalsPage/>} />
+          <Route path='monitoring' element={<MonitoringPage/>} />
+          <Route path='documents' element={<DocumentsPage/>} />
+          <Route path='reporting' element={<ReportingPage/>} />
+        </Route>
       </Route>
+      <Route path='/login' element={<LoginPage/>} />
     </Routes>
   )
 }
