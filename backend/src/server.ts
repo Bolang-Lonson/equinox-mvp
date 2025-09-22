@@ -6,8 +6,8 @@ import session from 'express-session';
 import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import connectPgSimple from 'connect-pg-simple';
-import { initSchema, pool } from './db';
-import { api } from './routes';
+import { initSchema, pool } from './db.js';
+import { api } from './routes.js';
 
 const app = express();
 app.use(

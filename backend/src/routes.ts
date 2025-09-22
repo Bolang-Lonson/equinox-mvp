@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import multer from 'multer';
-import { pool } from './db';
+import { pool } from './db.js';
 
 const upload = multer({ dest: 'uploads/' });
 export const api = Router();
