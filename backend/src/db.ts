@@ -24,6 +24,7 @@ export async function initSchema(): Promise<void> {
       avatar_url text,
       provider text,
       provider_id text,
+      password_hash text,
       created_at timestamptz default now()
     );
 

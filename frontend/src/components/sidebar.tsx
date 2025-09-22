@@ -12,6 +12,9 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import { NavLink } from 'react-router-dom';
 
+import PersonIcon from '@mui/icons-material/Person';
+import LogoutIcon from '@mui/icons-material/Logout';
+
 const navItems = [
   { to: '/dashboard', label: 'Overview', icon: <DashboardIcon fontSize="small" /> },
   { to: '/dashboard/portfolio', label: 'Portfolio', icon: <FolderIcon fontSize="small" /> },
@@ -20,6 +23,7 @@ const navItems = [
   { to: '/dashboard/monitoring', label: 'Monitoring', icon: <SearchIcon fontSize="small" /> },
   { to: '/dashboard/documents', label: 'Documents', icon: <DescriptionIcon fontSize="small" /> },
   { to: '/dashboard/reporting', label: 'Reporting', icon: <AssessmentIcon fontSize="small" /> },
+  { to: '/dashboard/profile', label: 'Profile', icon: <PersonIcon fontSize="small" /> },
 ];
 
 export default function Sidebar() {
@@ -46,6 +50,23 @@ export default function Sidebar() {
         ))}
       </List>
       <Divider />
+      <NavLink
+        to="#"
+        onClick={async (e) => {
+          e.preventDefault();
+          await fetch('http://localhost:4000/auth/logout', {
+            method: 'POST',
+            credentials: 'include',
+          });
+          window.location.href = '/login';
+        }}
+        className="block text-gray-700 hover:bg-red-50"
+      >
+        <ListItemButton>
+          <ListItemIcon sx={{ minWidth: 32 }}><LogoutIcon fontSize="small" color="error" /></ListItemIcon>
+          <ListItemText primaryTypographyProps={{ fontSize: 14 }} primary="Logout" />
+        </ListItemButton>
+      </NavLink>
       <div className="px-4 py-3 text-xs text-gray-500">
         <p>Roles: partner, attorney, paralegal</p>
       </div>

@@ -1,9 +1,59 @@
 import { Router } from 'express';
 import multer from 'multer';
+import bcrypt from 'bcryptjs';
 import { pool } from './db.js';
+
 
 const upload = multer({ dest: 'uploads/' });
 export const api = Router();
+
+// Local auth: login
+api.post('/auth/login', async (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({ error: 'Email and password required' });
+  }
+  try {
+    const { rows } = await pool.query('select * from users where email=$1 and provider=$2', [email, 'local']);
+    const user = rows[0];
+    if (!user || !user.password_hash) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+    const valid = await bcrypt.compare(password, user.password_hash);
+    if (!valid) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+    // Set session
+    req.login?.(user, (err) => {
+      if (err) return res.status(500).json({ error: 'Login failed' });
+      res.json({ user: { id: user.id, email: user.email, name: user.name } });
+    });
+  } catch (e) {
+    res.status(500).json({ error: 'Login failed' });
+  }
+});
+
+// Local auth: signup
+api.post('/auth/signup', async (req, res) => {
+  const { email, name, password } = req.body;
+  if (!email || !password || !name) {
+    return res.status(400).json({ error: 'All fields are required' });
+  }
+  try {
+    const existing = await pool.query('select id from users where email=$1', [email]);
+    if (existing.rows.length > 0) {
+      return res.status(400).json({ error: 'Email already registered' });
+    }
+    const password_hash = await bcrypt.hash(password, 10);
+    const { rows } = await pool.query(
+      `insert into users (email, name, password_hash, provider) values ($1, $2, $3, 'local') returning id, email, name` ,
+      [email, name, password_hash]
+    );
+    res.status(201).json({ user: rows[0] });
+  } catch (e) {
+    res.status(500).json({ error: 'Signup failed' });
+  }
+});
 
 // CRUD: trademarks
 api.post('/trademarks', async (req, res) => {

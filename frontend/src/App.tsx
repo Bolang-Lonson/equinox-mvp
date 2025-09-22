@@ -10,6 +10,8 @@ import DocumentsPage from './pages/documents';
 import ReportingPage from './pages/reporting';
 import ProtectedRoute from './components/ProtectedRoute';
 import LoginPage from './pages/login';
+import ProfilePage from './pages/profile';
+import SignupPage from './pages/signup';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -77,9 +79,11 @@ function App() {
           <Route path='monitoring' element={<MonitoringPage/>} />
           <Route path='documents' element={<DocumentsPage/>} />
           <Route path='reporting' element={<ReportingPage/>} />
+          <Route path='profile' element={<ProfilePage/>} />
         </Route>
       </Route>
       <Route path='/login' element={<LoginPage/>} />
+      <Route path='/signup' element={<SignupPage/>} />
     </Routes>
   )
 }
