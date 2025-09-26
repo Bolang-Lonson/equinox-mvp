@@ -86,7 +86,7 @@ api.get('/trademarks', async (req, res) => {
     : await pool.query(`select * from trademarks order by created_at desc limit 100`);
   res.json(rows);
 });
-
+// getting a particular trademark
 api.get('/trademarks/:id', async (req, res) => {
   const id = Number(req.params.id);
   const { rows } = await pool.query(`select * from trademarks where id=$1`, [id]);

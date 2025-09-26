@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { TextField, Button, Card, Typography, Alert } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { TextField, Button, Card, Typography, Alert, Link as MuiLink } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function SignupPage() {
   const [email, setEmail] = useState('');
@@ -31,11 +31,11 @@ export default function SignupPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
-      <Card className="w-full max-w-sm p-6 space-y-4">
+      <Card className="w-full max-w-sm p-6 flex flex-col gap-5 rounded-3xl">
         <Typography variant="h5" className="text-center">Sign up</Typography>
         {error && <Alert severity="error">{error}</Alert>}
         {success && <Alert severity="success">Signup successful! You can now log in.</Alert>}
-        <form className="space-y-4" onSubmit={handleSignup}>
+        <form className="flex flex-col gap-5" onSubmit={handleSignup}>
           <TextField
             label="Name"
             value={name}
@@ -61,6 +61,11 @@ export default function SignupPage() {
           />
           <Button type="submit" variant="contained" color="primary" fullWidth>Sign up</Button>
         </form>
+        <div className="pt-2 text-sm">
+          <MuiLink component={Link} to="/login" underline="hover">
+            Already have an account? Sign in
+          </MuiLink>
+        </div>
       </Card>
     </div>
   );

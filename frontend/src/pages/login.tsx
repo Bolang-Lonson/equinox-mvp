@@ -34,7 +34,7 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
       <div className="w-full max-w-sm rounded-xl border bg-white p-6 text-center space-y-4">
         <h1 className="text-2xl font-semibold">Sign in</h1>
-        <form className="space-y-4 text-left" onSubmit={handleLogin}>
+        <form className="flex flex-col gap-5 text-left" onSubmit={handleLogin}>
           {error && <Alert severity="error">{error}</Alert>}
           <TextField
             label="Email"
