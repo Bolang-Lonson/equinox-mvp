@@ -9,7 +9,7 @@ export type Owner = {
 export function useOwner() {
     const [owners, setOwners] = useState<Owner[]>([]);
     useEffect(() => {
-        async function fetchTrademarks() {
+        async function fetchOwners() {
             try {
                 // method: get
                 const resp = await fetch('http://localhost:4000/api/owners', {
@@ -22,7 +22,7 @@ export function useOwner() {
                 setOwners([]);
             }
         }
-        fetchTrademarks();
+        fetchOwners();
     },[]);
 
     return owners;

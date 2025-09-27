@@ -50,14 +50,14 @@ export default function PortfolioPage() {
   }
   return (
     <Stack spacing={2} sx={{}}>
-      <Card>
+      <Card sx={{overflowX: 'scroll'}}>
         <CardHeader
           title="Trademark Portfolio" 
           subheader="Cases, owners, status, documents"
         />
         <Divider />
         <CardContent className='flex flex-col gap-10 items-center'>
-          <Table sx={{minWidth: 650}}>
+          <Table>
             <TableHead>
               <TableRow>
                 <TableCell>Mark</TableCell>

@@ -110,10 +110,10 @@ api.get('/owners', async (_req, res) => {
 
 // Docket entries
 api.post('/dockets', async (req, res) => {
-  const { trademark_id, title, due_date } = req.body;
+  const { trademark_id, title, due_date, completed } = req.body;
   const { rows } = await pool.query(
-    `insert into docket_entries (trademark_id, title, due_date) values ($1,$2,$3) returning *`,
-    [trademark_id, title, due_date],
+    `insert into docket_entries (trademark_id, title, due_date, completed) values ($1,$2,$3,$4) returning *`,
+    [trademark_id, title, due_date, completed],
   );
   res.json(rows[0]);
 });
