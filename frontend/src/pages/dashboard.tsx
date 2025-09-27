@@ -19,7 +19,7 @@ export default function Dashboard() {
     <div className="min-h-screen flex bg-gray-50">
       <Sidebar />
       <main className="flex-1 overflow-auto">
-        <div className="flex justify-end items-center gap-4 p-4">
+        <div className="flex justify-end items-center gap-4 p-4 px-8">
           <span>{user?.name}</span>
           <Button
             variant="outlined"

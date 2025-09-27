@@ -3,6 +3,7 @@ import { useState, type FormEvent } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import SendIcon from '@mui/icons-material/Send';
 import { useTrademark, type Trademark } from '../hooks/useTrademark';
+import { useOwner, type Owner } from '../hooks/useOwner';
 
 const statuses = [
   {value: 'registered', label: 'Registered'},
@@ -13,7 +14,7 @@ const statuses = [
 ]
 export default function PortfolioPage() {
   const [trademarks, loading] = useTrademark();
-  console.log(trademarks);
+  const owners: Owner[] = useOwner();
   const [open, setOpen] = useState(false);
   // getting all trademarks
   if (loading) {
@@ -140,6 +141,17 @@ export default function PortfolioPage() {
           <Button startIcon={<SendIcon/>} type='submit' form='trademark-form'>Save</Button>
         </DialogActions>
       </Dialog>
+      <Stack>
+        <h1 className="text-gray-500 my-5">Owners</h1>
+        <ul>
+          {
+            owners.length > 0?
+            owners.map((owner) => <li key={owner.id} className='my-3'>{`-> id: ${owner.id}, name: ${owner.name}, contact email: ${owner.contact_email}`}</li>)
+            :
+            <p>No owners registered</p>
+          }
+        </ul>
+      </Stack>
     </Stack>
   );
 }

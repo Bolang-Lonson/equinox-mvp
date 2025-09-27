@@ -28,7 +28,7 @@ const navItems = [
 
 export default function Sidebar() {
   return (
-    <aside className="h-screen w-64 shrink-0 border-r bg-white">
+    <aside className="h-screen w-64 hidden md:block shrink-0 border-r bg-white">
       <div className="px-4 py-4 border-b">
         <span className="text-lg font-semibold">TM/IP Manager</span>
       </div>
